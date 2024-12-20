@@ -12,7 +12,7 @@ url = 'https://news.naver.com/section/100'  # 기본 URL
 
 df_titles = pd.DataFrame()  # 빈 데이터프레임 생성#
 
-for i in range(6):  # 6개 카테고리에 대해 반복
+for i in range(2,4):  # 6개 카테고리에 대해 반복
    url = 'https://news.naver.com/section/10{}'.format(i)  # 각 카테고리별 URL 생성
    resp = requests.get(url)  # URL로 요청 보내기
    soup = BeautifulSoup(resp.text, 'html.parser')  # HTML 파싱
