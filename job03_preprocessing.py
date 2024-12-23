@@ -80,7 +80,6 @@ wordsize = len(token.word_index) + 1  # 단어 사전의 크기를 저장합니�
 print(wordsize)
 
 print(tokened_X[:5])  # 변환된 결과를 확인합니다
-
 # 8. 문장 길이 맞추기
 # 모든 문장의 길이를 동일하게 맞춥니다
 max = 0
@@ -89,6 +88,8 @@ for i in range(len(tokened_X)):  # 가장 긴 문장의 길이를 찾습니다
        max = len(tokened_X[i])
 print(max)
 
+with open('./models/news_token_max_{}.pickle'.format(max), 'wb') as f:
+    pickle.dump(token, f)
 # 모든 문장을 가장 긴 문장의 길이에 맞춰 늘립니다 (짧은 문장은 0으로 채움)
 X_pad = pad_sequences(tokened_X, max)
 print(X_pad)
@@ -102,9 +103,9 @@ print(X_test.shape, Y_test.shape)
 
 # 10. 전처리 완료된 데이터 저장
 # 처리된 데이터를 파일로 저장하여 나중에 사용할 수 있게 합니다
-np.save('./crawling_data/news_data_X_train_max_{}_wordsize_{}'.format(max, wordsize), X_train)
-np.save('./crawling_data/news_data_Y_train_max_{}_wordsize_{}'.format(max, wordsize), Y_train)
-np.save('./crawling_data/news_data_X_test_max_{}_wordsize_{}'.format(max, wordsize), X_test)
-np.save('./crawling_data/news_data_Y_test_max_{}_wordsize_{}'.format(max, wordsize), Y_test)
+np.save('./crawling_data/news_data_X_train_{}_wordsize_{}_max_'.format(max, wordsize), X_train)
+np.save('./crawling_data/news_data_Y_train_{}_wordsize_{}_max_'.format(max, wordsize), Y_train)
+np.save('./crawling_data/news_data_X_test_{}_wordsize_{}_max_'.format(max, wordsize), X_test)
+np.save('./crawling_data/news_data_Y_test_{}_wordsize_{}_max_'.format(max, wordsize), Y_test)
 
 
